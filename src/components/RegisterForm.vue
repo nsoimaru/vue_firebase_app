@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import { auth } from '@/includes/firebase';
+import { auth, usersCollection } from '@/includes/firebase';
 
 export default {
   name: 'Registerform',
@@ -133,7 +133,21 @@ export default {
 
       let userCred = null;
       try {
-        userCred = await auth().createUserWithEmailAndPassword(values.email, values.password);
+        userCred = await auth.createUserWithEmailAndPassword(values.email, values.password);
+      } catch (e) {
+        this.reg_in_submission = false;
+        this.reg_alert_msg = 'bg-red-500';
+        this.reg_alert_msg = e;
+        return;
+      }
+
+      try {
+        await usersCollection.add({
+          name: values.name,
+          email: values.email,
+          age: values.age,
+          country: values.country,
+        });
       } catch (e) {
         this.reg_in_submission = false;
         this.reg_alert_msg = 'bg-red-500';
