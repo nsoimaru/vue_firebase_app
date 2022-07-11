@@ -11,8 +11,12 @@ module.exports = {
     parser: '@babel/eslint-parser',
   },
   rules: {
+    'vue/multi-word-component-names': 'off',
+    'linebreak-style': 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'vuejs-accesibilyti/label-has-for': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
   },
   overrides: [
     {
